@@ -6,61 +6,117 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
+  <style>
+    .active {
+      border-style: solid;
+      border-width: 10px;
+      border-image: linear-gradient(to right, rgb(11, 50, 244), rgb(212, 15, 215))1;
+    }
+  </style>
 </head>
 
 <body>
+  <div class="box"></div>
+  <div class="box2"></div>
+
   <script>
+
+    const groupA = []
+    const groupB = []
+    // 號碼容器 1
+    const box = document.querySelector('.box')
+    box.style.width = '55%'
+    box.style.height = '30%'
+    box.style.margin = 'auto'
+    box.style.display = 'flex'
+    box.style.flexWrap = 'wrap'
+    box.style.justifyContent = 'center'
+    box.style.borderRadius = '15px'
+    box.style.backgroundColor = 'green'
+
+    document.body.appendChild(box)
+    for (let i = 0; i < 38; i++) {
+      const block = document.createElement('div')
+      block.setAttribute('id', `${i + 1}`)
+      block.style.width = '80px'
+      block.style.height = '80px'
+      block.style.margin = '10px'
+      block.style.borderRadius = '5px'
+      block.style.fontSize = '48px'
+      block.style.textAlign = 'center'
+      block.style.lineHeight = '80px'
+
+      block.style.backgroundColor = 'lightgreen'
+      box.appendChild(block)
+      block.innerHTML = i + 1
+    }
+    // 號碼容器 2
+    const box2 = document.querySelector('.box2')
+    box2.style.width = '55%'
+    box2.style.height = '30%'
+    box2.style.margin = 'auto'
+    box2.style.display = 'flex'
+    box2.style.flexWrap = 'wrap'
+    box2.style.justifyContent = 'center'
+    box2.style.borderRadius = '15px'
+    box2.style.backgroundColor = 'red'
+
+    for (let i = 0; i < 8; i++) {
+      const block2 = document.createElement('div')
+      block2.setAttribute('id', `a${i + 1}`)
+      block2.style.width = '80px'
+      block2.style.height = '80px'
+      block2.style.margin = '10px'
+      block2.style.borderRadius = '5px'
+      block2.style.fontSize = '48px'
+      block2.style.textAlign = 'center'
+      block2.style.lineHeight = '80px'
+
+      block2.style.backgroundColor = 'pink'
+      box2.appendChild(block2)
+      block2.innerHTML = i + 1
+    }
+
+
+
+
+
     const rand = (min, max) => {
-      // min = 150
-      // max = 200
-      // Math.round(Math.random() * (50)) + 150
+
       return Math.round(Math.random() * (max - min)) + min
     }
 
-    const groupA = []
 
-    /*
-    // 取 6 次
-    for (let i = 0; i < 6; i++) {
-      // 每次隨機數字
-      const num = rand(1, 38)
-      if (groupA.includes(num)) {
-        // 如果重複，迴圈再跑一次
-        i--
-      } else {
-        // 沒有重複就放陣列
-        groupA.push(num)
-      }
-    }
-    */
-
-    /*
-    while(groupA.length < 6) {
-      // 每次隨機數字
-      const num = rand(1, 38)
-      // 沒有重複就放陣列
-      if (!groupA.includes(num)) {
-        groupA.push(num)
-      }
-    }
-    */
-
-    // 建立有 38 個數字的陣列
     const numbers = []
     for (let i = 1; i <= 38; i++) {
       numbers.push(i)
     }
     // 取數字
     for (let i = 0; i < 6; i++) {
+
       // 每次隨機一個數字陣列索引
       const index = rand(0, numbers.length - 1)
       // 放入陣列
       groupA.push(numbers[index])
+      // 在圖中加入.active 
+      const active = document.getElementById(numbers[index])
+      active.className = 'active'
       // 將取到的從數字陣列移除
       numbers.splice(index, 1)
     }
 
+
+    groupB.push(rand(1, 8))
+    const special = document.getElementById(`a${groupB[0]}`)
+    special.className = 'active'
+
+
+
     document.write(groupA.join(','))
+    document.write('</br>')
+
+    document.write(groupB)
+
   </script>
 </body>
 
